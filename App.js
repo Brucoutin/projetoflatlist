@@ -1,11 +1,14 @@
 import React, { Component, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import Tela from './src/Tela/Tela';
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 const projeto  = (data) => {
   const [searchText, setSearchText] = useState('')
   const [filteredContacts, setFilteredContacts] = useState()
 
   const contatos = Tela
+  console.log(contatos, 'jajajajajja')
+
   const handleSearch = text => {
     setSearchText(text)
     const filtered = contatos.filter(contact => {
@@ -13,17 +16,19 @@ const projeto  = (data) => {
     })
     setFilteredContacts(filtered)
   }
-  console.log(contatos, 'jajajajajja')
-
+   
   return (
     <View style={styles.container}>
      <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search"
+          placeholder="Procurar"
           value={searchText}
           onChangeText={handleSearch}
         />
+        <TouchableOpacity onPress={() => handleSearch()} style={styles.btnSearch}>
+        <FontAwesome name="search" color="black" size={25} />
+        </TouchableOpacity>
       </View>
       <FlatList
         data={contatos}
@@ -60,6 +65,11 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius:10,
     backgroundColor:"#eee"
+  },
+  btnSearch:{
+    bottom:'50%', 
+    alignSelf:'flex-end', 
+    right:'2%'
   },
   itemContainer: {
     flex: 1,
