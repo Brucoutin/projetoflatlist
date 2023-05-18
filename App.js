@@ -2,45 +2,43 @@ import React, { Component, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import Tela from './src/Tela/Tela';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
-const projeto  = (data) => {
+const projeto = (data) => {
   const [searchText, setSearchText] = useState('')
-  const [filteredContacts, setFilteredContacts] = useState()
+  const [filteredContacts, setFilteredContacts] = useState(Tela)
 
-  const contatos = Tela
-  console.log(contatos, 'jajajajajja')
-
-  const handleSearch = text => {
+  const handleSearch = (text)=> {
     setSearchText(text)
-    const filtered = contatos.filter(contact => {
+    const filtered = filteredContacts.filter(contact => {
       return contact.name.toLowerCase().includes(text.toLowerCase())
     })
     setFilteredContacts(filtered)
   }
+  
    
   return (
     <View style={styles.container}>
-     <View style={styles.searchContainer}>
+      <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
           placeholder="Procurar"
-          value={searchText}
+         
           onChangeText={handleSearch}
         />
         <TouchableOpacity onPress={() => handleSearch()} style={styles.btnSearch}>
-        <FontAwesome name="search" color="black" size={25} />
+          <FontAwesome name="search" color="black" size={25} />
         </TouchableOpacity>
       </View>
       <FlatList
-        data={contatos}
+        data={filteredContacts}
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
-          <Image style={styles.image} source={{ uri: item.image }} />
-          <View style={styles.textContainer}>
-            <Text style={styles.nameText}>{item.name}</Text>
-            <Text style={styles.phoneText}>{item.phone}</Text>
+            <Image style={styles.image} source={{ uri: item.image }} />
+            <View style={styles.textContainer}>
+              <Text style={styles.nameText}>{item.name}</Text>
+              <Text style={styles.phoneText}>{item.phone}</Text>
+            </View>
           </View>
-          </View>
-          
+
         )}
         keyExtractor={item => item.id.toString()}
       />
@@ -63,13 +61,13 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     padding: 8,
-    borderRadius:10,
-    backgroundColor:"#eee"
+    borderRadius: 10,
+    backgroundColor: "#eee"
   },
-  btnSearch:{
-    bottom:'50%', 
-    alignSelf:'flex-end', 
-    right:'2%'
+  btnSearch: {
+    bottom: '50%',
+    alignSelf: 'flex-end',
+    right: '2%'
   },
   itemContainer: {
     flex: 1,
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-  //  backgroundColor: 'pink'
+    //  backgroundColor: 'pink'
 
   },
   textContainer: {
