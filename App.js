@@ -1,8 +1,8 @@
 import React, { Component, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TextInput, } from 'react-native';
 import Tela from './src/Tela/Tela';
-import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
-const projeto = (data) => {
+
+const projeto = () => {
   const [searchText, setSearchText] = useState('')
   const [filteredContacts, setFilteredContacts] = useState(Tela)
 
@@ -21,12 +21,8 @@ const projeto = (data) => {
         <TextInput
           style={styles.searchInput}
           placeholder="Procurar"
-         
           onChangeText={handleSearch}
         />
-        <TouchableOpacity onPress={() => handleSearch()} style={styles.btnSearch}>
-          <FontAwesome name="search" color="black" size={25} />
-        </TouchableOpacity>
       </View>
       <FlatList
         data={filteredContacts}
